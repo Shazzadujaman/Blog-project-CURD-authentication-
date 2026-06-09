@@ -3,14 +3,9 @@ from . import views
 
 urlpatterns = [
     path('add/',views.add_post,name='add_post'),
-    path('edit/<int:id>',views.edit_post,name='edit_post'),
-    path('delete/<int:id>',views.delete_post,name='delete_post'),
-<<<<<<< HEAD
+    path('edit/<int:id>/',views.edit_post,name='edit_post'),
+    path('delete/<int:id>/',views.delete_post,name='delete_post'),
     path('detail/<int:id>/',views.post_detail,name='post_detail'),
     path('comment/delete/<int:id>/',views.delete_comment,name='delete_comment'),
-=======
-    path('post/<int:pk>/', views.post_detail, name='post_detail'),
-    path('post/<int:pk>/like/', views.like_post, name='like_post'),
-
->>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb
+    path('detail/<int:id>/like/', views.like_post, name='like_post'),
 ]

@@ -2,24 +2,16 @@ from django.shortcuts import render,redirect,get_object_or_404
 from . import forms
 from . import models
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from django.contrib import messages
 
-=======
->>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb
 # Create your views here.
 @login_required
 def add_post(request):
     if request.method=="POST":
      post_form=forms.Post_form(request.POST)
      if post_form.is_valid():
-<<<<<<< HEAD
         post = post_form.save(commit=False)   # ❗ important
         post.author = request.user            # ✅ set logged-in user
-=======
-        post = post_form.save(commit=False)   
-        post.author = request.user            
->>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb
         post.save()
         post_form.save_m2m()  
         return redirect('profile')
@@ -43,7 +35,6 @@ def edit_post(request,id):
 
 @login_required
 def delete_post(request,id):
-<<<<<<< HEAD
    try:
       post=models.Post.objects.get(pk=id)
       # Check permissions
@@ -113,42 +104,11 @@ def delete_comment(request, id):
         
     return redirect('post_detail', id=post_id)
 
-=======
-   post=models.Post.objects.get(pk=id)
-   post.delete()
-   return redirect('profile')
-
 @login_required
-def post_detail(request, pk):
-    post=get_object_or_404(models.Post, pk=pk)
-    comments=post.comments.all()
-
-    form=forms.CommentForm()
-
-    if request.method=='POST':
-       if request.user.is_authenticated:
-          form=forms.CommentForm(request.POST)
-          if form.is_valid():
-                comment = form.save(commit=False)
-                comment.user = request.user
-                comment.post = post
-                comment.save()
-                return redirect('post_detail', pk=pk)
-          
-    return render(request, 'post_detail.html', {
-        'post': post,
-        'comments': comments,
-        'form': form
-    })    
-
-
-def like_post(request, pk):
-    post = get_object_or_404(models.Post, pk=pk)
-
+def like_post(request, id):
+    post = get_object_or_404(models.Post, pk=id)
     if request.user in post.likes.all():
         post.likes.remove(request.user)  # unlike
     else:
         post.likes.add(request.user)     # like
-
-    return redirect('post_detail', pk=pk)
->>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb
+    return redirect('post_detail', id=id)
