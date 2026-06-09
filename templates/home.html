@@ -27,7 +27,11 @@
 <div class="col-md-6 col-lg-4" >
   <div class="card shadow-sm border-0 m-2 p-2">
     <h5 class="card-title fw-bold">{{post.title}}</h5>
+<<<<<<< HEAD
     <p class="card-text">{{post.content|truncatewords:20}}</p>
+=======
+    <p class="card-text">{{post.content}}</p>
+>>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb
     <small>Author: <button class="btn btn-success btn-sm m-2">{{post.author.username}}</button></small>
     <p>
     Catagories : 
@@ -35,7 +39,14 @@
     <button class="btn btn-primary btn-sm m-2">{{cat.name}}</button>
     {%endfor%}
     </p>
+<<<<<<< HEAD
     <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-success btn-sm">View Details →</a>
+=======
+    <p>Total Likes 👍: {{ post.likes.count }}</p>
+    <a href={%url 'post_detail'  post.pk%}><button class="btn btn-warning btn-sm m-2">See Details</button></a>
+    
+
+>>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb
   </div>
 </div>
 {%endfor%}

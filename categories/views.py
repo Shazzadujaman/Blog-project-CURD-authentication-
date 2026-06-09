@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render,redirect
 from . import forms
 from . import models
@@ -32,4 +33,19 @@ def delete_category(request, id):
     except models.Categories.DoesNotExist:
         messages.error(request, "Category not found.")
         
-    return redirect('add_categories')
+    return redirect('add_categories')
+=======
+from django.shortcuts import render,redirect
+from . import forms
+# Create your views here.
+def add_categories(request):
+    if request.method=="POST":
+     categories_form=forms.Categories_form(request.POST)
+     if categories_form.is_valid():
+        categories_form.save()
+        return redirect('add_categories')
+    else:
+       categories_form=forms.Categories_form() 
+
+    return render(request,"add_categories.html",{'form': categories_form})
+>>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb

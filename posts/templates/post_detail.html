@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<<<<<<< HEAD
 <div class="container mt-4">
 
   <!-- Post Card -->
@@ -84,3 +85,74 @@
 
 </div>
 {% endblock %}
+=======
+
+<div class="container mt-4">
+  <div class="row">
+
+    <!-- 🟦 LEFT SIDE -->
+    <div class="col-md-7">
+      <div class="card shadow-sm border-0 p-3">
+        <h5 class="fw-bold">{{ post.title }}</h5>
+        <p>{{ post.content }}</p>
+
+        <small>
+          Author:
+          <span class="btn btn-success btn-sm m-2">
+            {{ post.author.username }}
+          </span>
+        </small>
+
+        <p>
+          Categories:
+          {% for cat in post.category.all %}
+            <span class="btn btn-primary btn-sm m-2">{{ cat.name }}</span>
+          {% endfor %}
+          <form action="{% url 'like_post' post.pk %}" method="POST">
+    {% csrf_token %}
+    
+    {% if user in post.likes.all %}
+        <button class="btn btn-danger">👎 Unlike</button>
+    {% else %}
+        <button class="btn btn-primary">👍 Like</button>
+    {% endif %}
+</form>
+
+<p>Total Likes: {{ post.likes.count }}</p>
+        </p>
+      </div>
+      
+    </div>
+
+    <!-- 🟨 RIGHT SIDE -->
+    <div class="col-md-5">
+      <div class="card p-3 mb-3">
+        <h3>All Comments</h3>
+
+        {% for comment in comments %}
+          <div class="border p-2 mb-2">
+            <strong>{{ comment.user }}</strong><br>
+            {{ comment.content }}<br>
+            <small>{{ comment.created_at }}</small>
+          </div>
+        {% empty %}
+          <p>No comments yet.</p>
+        {% endfor %}
+      </div>
+
+      <!-- FORM -->
+      <div class="card p-3">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button class="btn btn-warning mt-2">Submit</button>
+        </form>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+>>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb

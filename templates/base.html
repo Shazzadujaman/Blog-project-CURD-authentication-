@@ -31,6 +31,7 @@
         
       </ul>
     </div>
+<<<<<<< HEAD
       <div class="d-flex gap-3 align-items-center">
          {%if request.user.is_authenticated%}
           {% if request.user.profile.role == 'super_admin' %}
@@ -43,6 +44,10 @@
           {% else %}
             <span class="badge bg-info text-dark">Author</span>
           {% endif %}
+=======
+      <div class="d-flex gap-3">
+         {%if request.user.is_authenticated%}
+>>>>>>> abdfa808ff13bfb59dc6fe4fc61a6cb9fe1b8fbb
           <a class="btn btn-warning " href="{% url 'profile'%}">Profile</a>
           <a class=" btn btn-primary" href="{% url 'logout'%}">Logout</a>
          {%else%}
